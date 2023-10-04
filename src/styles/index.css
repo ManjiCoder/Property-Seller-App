@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#sliderContainer {
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+#sliderContainer::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
+}

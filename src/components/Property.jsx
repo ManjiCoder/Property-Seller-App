@@ -5,7 +5,10 @@ import { LiaBathSolid } from "react-icons/lia";
 import { BsArrowsMove, BsBuildings } from "react-icons/bs";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 export default function Property() {
+  const navigation = useNavigate();
   const { propertyArr } = useSelector((state) => state.property);
   return (
     <section className="grid gap-7 py-7 items-center justify-center grid-cols-3">
@@ -21,16 +24,20 @@ export default function Property() {
         return (
           <div
             key={hotel_id}
-            className="bg-gray-50 w-5/6 p-2 shadow-lg rounded-xl mx-auto"
+            className="bg-gray-50 w-5/6 p-2 shadow-lg rounded-xl mx-auto cursor-pointer"
+            onClick={() => navigation(`/property/${hotel_id}`)}
           >
             <div className="relative">
-              <div className="relative rounded-xl h-56 w-full overflow-scroll">
+              <div
+                id="sliderContainer"
+                className="rounded-xl h-56 w-full flex relative overflow-x-scroll snap-mandatory snap-x"
+              >
                 {photos.map((imgUrl) => (
                   <img
                     key={imgUrl}
                     src={imgUrl}
                     alt=""
-                    className="absolute rounded-xl h-56 w-full"
+                    className="relative snap-center object-fill rounded-xl h-56 w-full"
                   />
                 ))}
               </div>

@@ -6,6 +6,7 @@ export default function App() {
       <Routes>
         <Route path="*" element={<Navigate to={"/property/london"} />} />
         <Route path="/property/:city" element={<Home />} />
+        <Route path="/property/:id" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );

@@ -4,16 +4,13 @@ import Cities from "../components/Cities";
 import Header from "../components/Header";
 import Property from "../components/Property";
 import { LiaHourglassStartSolid } from "react-icons/lia";
-import { useDispatch } from "react-redux";
-import { setPropertyArr } from "../redux/feature/property";
+import { useDispatch, useSelector } from "react-redux";
+import { setPropertyArr, viewMoreProperty } from "../redux/feature/property";
+import { options, url } from "../utils";
 
 export default function Home() {
   const dispatch = useDispatch();
-
-  let url = `${import.meta.env.VITE_BASE_URL}/property.json`;
-  let options = {
-    headers: { "Content-Type": "application/json" },
-  };
+  const { isAllPropertyLoaded } = useSelector((state) => state.property);
 
   const getHotels = async () => {
     let response = await fetch(url, options);
@@ -24,7 +21,7 @@ export default function Home() {
   const handleViewMore = async () => {
     let response = await fetch(url, options);
     let data = await response.json();
-    console.log(data);
+    dispatch(viewMoreProperty(data));
   };
   useEffect(() => {
     getHotels();
@@ -35,15 +32,17 @@ export default function Home() {
       <Header />
       <Cities />
       <Property />
-      <div className="grid place-items-center mb-7">
-        <Button
-          isActive={true}
-          text={"Show More"}
-          icon={<LiaHourglassStartSolid />}
-          iconStyle="-order-1"
-          handleSubmit={handleViewMore}
-        />
-      </div>
+      {!isAllPropertyLoaded && (
+        <div className="grid place-items-center mb-7">
+          <Button
+            isActive={true}
+            text={"Show More"}
+            icon={<LiaHourglassStartSolid />}
+            iconStyle="-order-1"
+            handleSubmit={handleViewMore}
+          />
+        </div>
+      )}
     </div>
   );
 }
