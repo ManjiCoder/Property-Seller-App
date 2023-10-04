@@ -25,7 +25,6 @@ export const propertySlice = createSlice({
         state.isAllPropertyLoaded = true;
       } else {
         newProperty = newProperty.slice(0, n + numberOfProperty);
-        console.log(newProperty, n);
         state.propertyArr = state.propertyArr.concat(
           ...newProperty.slice(-numberOfProperty)
         );

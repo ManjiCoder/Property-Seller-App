@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/*"
+  to = "/property/london"
+  status = 200
